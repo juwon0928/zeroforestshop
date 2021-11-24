@@ -1,14 +1,11 @@
 import os
-import dj_database_url
 from decouple import config
 from django.views.generic import TemplateView
-
-from zshop.settings.development import DATABASES
+import dj_database_url
 
 import sys
 sys.modules['django.utils.six.moves.urllib.parse']=__import__('six.moves.urllib_parse', fromlist=['urlencode'])
 sys.modules['django.utils.six.moves.urllib.request']=__import__('six.moves.urllib_request', fromlist=['urlopen'])
-
 
 BASE_DIR = os.path.dirname(os.path.dirname(
     os.path.dirname(os.path.abspath(__file__))))
@@ -17,7 +14,7 @@ SECRET_KEY = config('SECRET_KEY')
 
 DEBUG = False
 
-# ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
+# ALLOWED_HOSTS = ['localhost']
 
 INSTALLED_APPS = [
     'baton',
@@ -46,7 +43,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware', # 추가
 ]
 
 ROOT_URLCONF = 'zshop.urls'
@@ -69,7 +66,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'zshop.wsgi.application'
-
 
 LANGUAGE_CODE = 'ko-kr'
 TIME_ZONE = 'Asia/Seoul'
@@ -102,6 +98,7 @@ FILE_UPLOAD_HANDLERS = [
     'django.core.files.uploadhandler.TemporaryFileUploadHandler',
 ]
 
+
 MAX_UPLOAD_SIZE = 5242880
 DATA_UPLOAD_MAX_MEMORY_SIZE = None
 FILE_UPLOAD_MAX_MEMORY_SIZE = 5242880
@@ -126,5 +123,3 @@ BATON = {
         {'type': 'app', 'name': 'auth', 'label': '인증 및 권한'},
         {'type': 'app', 'name': 'django_summernote', 'label': '썸머노트'},
     ),}
-
-STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
