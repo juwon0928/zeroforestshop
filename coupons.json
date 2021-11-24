@@ -1,0 +1,1 @@
+[{"model": "core.coupon", "pk": 1, "fields": {"code": "12345", "amount": 5.0}}, {"model": "core.coupon", "pk": 2, "fields": {"code": "12312123", "amount": 10.0}}]

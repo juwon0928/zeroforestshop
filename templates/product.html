@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  <main class="mt-5 pt-4">
+    <div class="container dark-grey-text mt-5">
+
+      <!--Grid row-->
+      <div class="row wow fadeIn">
+
+        <!--Grid column-->
+        <div class="col-md-6 mb-4">
+          
+          <img src="{{ item.image.url }}" class="img-fluid" alt="">
+
+        </div>
+        <!--Grid column-->
+
+        <!--Grid column-->
+        <div class="col-md-6 mb-4">
+
+          <!--Content-->
+          <div class="p-4">
+
+            <div class="mb-3">
+              <a href="">
+                <span class="badge purple mr-1">{{ object.get_category_display }}</span>
+              </a>
+            </div>
+
+            <p class="lead font-weight-bold" style="font-size: 25px;">{{ object.title }}</p>
+            
+            <p class="lead"> <!--수정해야할 부분-->
+              {% if object.discount_price %}
+              <h5 class="mr-1" style="display: inline">
+                <del>{{ object.price | floatformat:"0" }}원</del>
+              </h5>
+              <h4 style="font-weight: bold; color: green; display: inline;">
+                  {{ object.discount_price | floatformat:"0"  }}원
+              </h4>
+              {% else %}
+              <h4 style="font-weight: bold; color: green;">
+                  {{ object.price | floatformat:"0"  }}원
+              </h4>
+              {% endif %}
+            </p>
+
+            <p>재고 {{ object.stock }}</p>
+
+            {% comment %} <form class="d-flex justify-content-left">
+              <!-- Default input -->
+              <input type="number" value="1" aria-label="Search" class="form-control" style="width: 100px">
+              <button class="btn btn-primary btn-md my-0 p" type="submit">
+                장바구니 담기
+                <i class="fas fa-shopping-cart ml-1"></i>
+              </button>
+
+            </form> {% endcomment %}
+            <a href="{{ object.get_add_to_cart_url }}" class="btn btn-light-green btn-md my-0 mt-5 p">
+              장바구니 담기
+              <i class="fas fa-shopping-cart ml-1"></i>
+            </a>
+            <a href="{{ object.get_remove_from_cart_url }}" class="btn btn-light btn-md my-0 mt-5 p">
+              장바구니에서 삭제
+            </a>
+
+          </div>
+          <!--Content-->
+
+        </div>
+        <!--Grid column-->
+      <div class="col-md-6 mb-4" style="display: block; margin: 0px auto">
+        <p style="color: black;">{{ object.description | safe}}</p>
+      </div>
+
+      </div>
+      <!--Grid row-->
+
+    </div>
+  </main>
+
+{% endblock content %}

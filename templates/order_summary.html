@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <main>
+    <div class="container">
+
+    <div class="table-responsive text-nowrap">
+    <h2>장바구니</h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">제품명</th>
+            <th scope="col">가격</th>
+            <th scope="col">수량</th>
+            <th scope="col">전체 제품 가격</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for order_item in object.items.all %}
+        <tr>
+            <th scope="row">{{ forloop.counter }}</th>
+            <td>{{ order_item.item.title }}</td>
+            <td>{{ order_item.item.price | floatformat:"0"}}</td>
+            <td>
+                <a href="{% url 'core:remove-single-item-from-cart' order_item.item.slug %}"><i class="fas fa-minus-circle mr-2"></i></a>
+                {{ order_item.quantity }}
+                <a href="{% url 'core:add-to-cart' order_item.item.slug %}"><i class="fas fa-plus-circle ml-2"></i></a>
+            </td>
+            <td>
+            {% if order_item.item.discount_price %}
+                {{ order_item.get_total_discount_item_price | floatformat:"0"}}원
+                <span class="badge badge-success">할인된금액: {{ order_item.get_amount_saved | floatformat:"0"}}원</span>
+            {% else %}
+                {{ order_item.get_total_item_price | floatformat:"0"}}원
+            {% endif %}
+            <a style='color: gainsboro;' href="{% url 'core:remove-from-cart' order_item.item.slug %}">
+                <i class="fas fa-trash float-right"></i>
+            </a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan='5'>장바구니가 비었습니다.</td>
+        </tr>
+        <tr>
+            <td colspan="5">
+            <a class='btn btn-light-green float-right' href='/'>계속 쇼핑하기</a>
+            </td>
+        </tr>
+        {% endfor %}
+        {% if object.coupon %}
+        <tr>
+            <td colspan="4"><b>Coupon</b></td>
+            <td><b>-{{ object.coupon.amount | floatformat:"0"}}원</b></td>
+        </tr>
+        {% endif %}
+        {% if object.get_total %}
+        <tr>
+            <td colspan="4"><b>전체 금액</b></td>
+            <td><b>{{ object.get_total | floatformat:"0"}}원</b></td>
+        </tr>
+        <tr>
+            <td colspan="5">
+            <a class='btn btn-light-green float-right ml-2' href='/checkout/'>결제 하기</a>
+            <a class='btn btn-light float-right' href='/'>계속 쇼핑하기</a>
+            </td>
+        </tr>
+        {% endif %}
+        </tbody>
+    </table>
+
+    </div>
+
+    </div>
+  </main>
+
+{% endblock content %}
+
