@@ -70,14 +70,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'zshop.wsgi.application'
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-#
-# DATABASES['default'].update(dj_database_url.config(conn_max_age=500))
 
 LANGUAGE_CODE = 'ko-kr'
 TIME_ZONE = 'Asia/Seoul'
