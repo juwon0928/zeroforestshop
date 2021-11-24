@@ -70,6 +70,15 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'zshop.wsgi.application'
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+
+DATABASES['default'].update(dj_database_url.config(conn_max_age=500))
+
 LANGUAGE_CODE = 'ko-kr'
 TIME_ZONE = 'Asia/Seoul'
 USE_I18N = True
@@ -101,7 +110,6 @@ FILE_UPLOAD_HANDLERS = [
     'django.core.files.uploadhandler.TemporaryFileUploadHandler',
 ]
 
-DATABASES['default'].update(dj_database_url.config(conn_max_age=500))
 MAX_UPLOAD_SIZE = 5242880
 DATA_UPLOAD_MAX_MEMORY_SIZE = None
 FILE_UPLOAD_MAX_MEMORY_SIZE = 5242880
