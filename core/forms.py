@@ -43,3 +43,18 @@ class BoardForm(forms.ModelForm):
     class Meta:
         model = Board
         fields = '__all__'
+
+class CreateForm(forms.ModelForm):
+    class Meta:
+        model = Board
+        fields = ['title', 'content', 'writer']
+        widgets = {
+            'subject': forms.TextInput(attrs={'class': 'form-control'}),
+            'content': forms.Textarea(attrs={'class': 'form-control', 'rows': 20}),
+            'writer': forms.TextInput(attrs={'class': 'form-control'}),
+        }
+        labels = {
+            'subject': '제목',
+            'content': '내용',
+            'writer': '작성자',
+        }

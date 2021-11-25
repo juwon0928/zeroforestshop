@@ -2,7 +2,6 @@ from django.contrib import admin
 
 from core.models import Category, Item, OrderItem, Order, Payment, Coupon, Address, UserProfile
 from django_summernote.admin import SummernoteModelAdmin
-from .models import Board
 
 class OrderAdmin(admin.ModelAdmin):
     list_display = ['user',
@@ -63,4 +62,3 @@ admin.site.register(Coupon)
 admin.site.register(Address, AddressAdmin)
 admin.site.register(UserProfile)
 admin.site.register(Category)
-admin.site.register(Board)

@@ -1,16 +1,61 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>Document</title>
+    {% block extra_head %}
+    {% endblock %}
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang&display=swap" rel="stylesheet">
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/mdb.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/style.min.css' %}" rel="stylesheet">
+    <style type="text/css">
+    body {
+        font-family: 'Gowun Batang', serif;
+        background: #faf9eb;
+    }
+    html,
+    body,
+    header,
+    .carousel {
+      height: 10vh;
+    }
+  </style>
 </head>
+{% include "navbar.html" %}
 <body>
-    <form method="POST">
+    <header style="margin-top: 70px;">
+    <div class="navbar shadow-sm mb-3">
+        <div class="container d-flex justify-content-between">
+            <a href="#" class="navbar-brand d-flex align-items-center">
+                <strong style="color: #689f38">게시판</strong>
+            </a>
+        </div>
+    </div>
+</header>
+    <form method="POST" style="margin-left: 300px;">
         {% csrf_token %}
         {{create_form.as_p}}
-        <input type="submit" value = "제출">
+        <input class="btn btn-light-green" type="submit" value = "제출">
     </form>
+    {% block content %}
+    {% endblock content %}
+
+    {% block extra_body %}
+    {% endblock %}
+
+    {% include "footer.html" %}
+    {% include "scripts.html" %}
+
+    {% block extra_scripts %}
+    {% endblock extra_scripts %}
 </body>
 </html>
