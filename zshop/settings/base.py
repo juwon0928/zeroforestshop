@@ -12,7 +12,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(
 
 SECRET_KEY = config('SECRET_KEY')
 
-DEBUG = True
+DEBUG = False
 
 # ALLOWED_HOSTS = ['localhost']
 
