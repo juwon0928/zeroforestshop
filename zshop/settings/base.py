@@ -13,8 +13,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(
 SECRET_KEY = config('SECRET_KEY')
 
 DEBUG = False
-
-# ALLOWED_HOSTS = ['localhost']
+ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'baton',
